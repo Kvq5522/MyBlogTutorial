@@ -1,6 +1,7 @@
 "use client";
 
 import ScrollToBottomDectection from "@/components/ScrollDetections/ScrollToBottomDetection";
+import useMediaQuery from "@/hooks/use-media-query";
 import { Blog } from "@/types/blog";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,8 @@ const InfiniteScrollBlogs = ({ initialBlogs }: InfiniteScrollBlogsProps) => {
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
+  const isXlScreen = useMediaQuery("(min-width: 1280px)");
+  const isMdScreen = useMediaQuery("(min-width: 768px)");
 
   useEffect(() => {
     if (page > 1) {
@@ -119,6 +122,23 @@ const InfiniteScrollBlogs = ({ initialBlogs }: InfiniteScrollBlogsProps) => {
             </div>
           );
         })}
+
+        {loading &&
+          Array.from({
+            length: isXlScreen ? 1 + 3 + 3 : isMdScreen ? 2 + 2 : 1,
+          }).map((_, skeletonIndex) => {
+            return (
+              <div key={skeletonIndex} className="bg-[#f3f4f6] rounded-lg pb-4">
+                <div className="bg-slate-200 h-2/3 w-full min-h-[300px] min-w-[300px] rounded-t-lg"></div>
+
+                <div className="p-4 flex flex-col gap-4">
+                  <p className="bg-slate-200 h-8 rounded-lg"></p>
+                  <p className="bg-slate-200 h-8 rounded-lg"></p>
+                  <p className="bg-slate-200 h-8 rounded-lg"></p>
+                </div>
+              </div>
+            );
+          })}
       </div>
 
       <ScrollToBottomDectection
