@@ -7,7 +7,10 @@ export const metadata: Metadata = {
   description: "Let's discover various information!",
 };
 
-const fetchBlogs = async () => {
+const fetchBlogs = async (): Promise<{
+  blogs: Blog[];
+  maxPage: number;
+}> => {
   try {
     const res = await (
       await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}/blogs/api`, {
@@ -37,14 +40,22 @@ const fetchBlogs = async () => {
       }
     });
 
-    return blogs;
+    return {
+      blogs: blogs,
+      maxPage: Math.ceil(Number(res.data?.["total"]) / 9),
+    };
   } catch (error) {
-    return [];
+    return {
+      blogs: [],
+      maxPage: 0,
+    };
   }
 };
 
 const BlogsPage = async () => {
-  const blogs = await fetchBlogs();
+  const res = await fetchBlogs();
+  const blogs = res["blogs"];
+  const maxPage = res["maxPage"];
 
   return (
     <main>
@@ -53,7 +64,7 @@ const BlogsPage = async () => {
       </section>
 
       <section>
-        <InfiniteScrollBlogs initialBlogs={blogs} />
+        <InfiniteScrollBlogs initialBlogs={blogs} maxPageProp={maxPage} />
       </section>
     </main>
   );

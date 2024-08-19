@@ -9,11 +9,16 @@ import React, { useEffect, useState } from "react";
 
 type InfiniteScrollBlogsProps = {
   initialBlogs: Array<Blog>;
+  maxPageProp: number;
 };
 
-const InfiniteScrollBlogs = ({ initialBlogs }: InfiniteScrollBlogsProps) => {
+const InfiniteScrollBlogs = ({
+  initialBlogs,
+  maxPageProp,
+}: InfiniteScrollBlogsProps) => {
   const [blogs, setBlogs] = useState<Array<Blog>>(initialBlogs);
   const [page, setPage] = useState<number>(1);
+  const [maxPage, setMaxPage] = useState<number>(maxPageProp);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const isXlScreen = useMediaQuery("(min-width: 1280px)");
@@ -143,7 +148,7 @@ const InfiniteScrollBlogs = ({ initialBlogs }: InfiniteScrollBlogsProps) => {
 
       <ScrollToBottomDectection
         onScrollToBottom={() => {
-          if (!loading) {
+          if (!loading && page < maxPage) {
             setPage((prev) => prev + 1);
             setLoading(true);
           }

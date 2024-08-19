@@ -13,6 +13,8 @@ export const GET = async (req: Request) => {
         : 0,
     });
 
+    console.log(res);
+
     return Response.json({
       data: res,
     });
