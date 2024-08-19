@@ -7,7 +7,7 @@ import Footer from "@/components/Footer/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.WEBSITE_URL ?? ""),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_WEBSITE_URL ?? ""),
   keywords: ["Blogs", "Articles", "Information"],
   title: {
     default: "My Blogs",

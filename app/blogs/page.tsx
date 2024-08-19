@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const BlogsPage = async () => {
   const res = await (
-    await fetch(`${process.env.WEBSITE_URL}/blogs/api`, {
+    await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}/blogs/api`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -8,7 +8,7 @@ export const generateMetadata = async ({
 }: {
   params: { id: string };
 }) => {
-  const res = await fetch(`${process.env.WEBSITE_URL}/blogs/${id}/api`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}/blogs/${id}/api`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const BlogDetailPage = async ({
 }: {
   params: { id: string };
 }) => {
-  const res = await fetch(`${process.env.WEBSITE_URL}/blogs/${id}/api`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}/blogs/${id}/api`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

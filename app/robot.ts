@@ -7,7 +7,7 @@ const robot = (): MetadataRoute.Robots => {
       allow: "/",
       disallow: ["blogs/api", "blogs/[id]/api"],
     },
-    sitemap: `${process.env.WEBSITE_URL}/sitemap.xml`,
+    sitemap: `${process.env.NEXT_PUBLIC_WEBSITE_URL}/sitemap.xml`,
   };
 };
 

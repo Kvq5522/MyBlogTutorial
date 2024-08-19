@@ -21,7 +21,7 @@ const InfiniteScrollBlogs = ({ initialBlogs }: InfiniteScrollBlogsProps) => {
       const fetchBlogs = async () => {
         try {
           const res = await fetch(
-            `${process.env.WEBSITE_URL}/blogs/api?page=${page}`,
+            `${process.env.NEXT_PUBLIC_WEBSITE_URL}/blogs/api?page=${page}`,
             {
               method: "GET",
               headers: {
